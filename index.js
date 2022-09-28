@@ -25,14 +25,6 @@ function dateIsValid(date) {
   return date instanceof Date && !isNaN(date);
 }
 
-var getUnixTimeStamp = (date) => {
-  return Math.floor(date.getTime() / 1000);
-};
-
-var getUtcTimeStamp = (date) => {
-  return date.toUTCString();
-};
-
 // your first API endpoint...
 app.get("/api/hello", function (req, res) {
   res.json({ greeting: 'hello API' });
@@ -49,7 +41,7 @@ app.get("/api/:date?", function (req, res) {
   if (!dateIsValid(date)) {
     res.json({ error : "Invalid Date" });
   }
-  res.json({ unix: getUnixTimeStamp(date), utc: getUtcTimeStamp(date) });
+  res.json({ unix: date.getTime(), utc: date.toUTCString() });
 });
 
 
